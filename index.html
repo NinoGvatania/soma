@@ -10,8 +10,8 @@
     --bg: #070b12;
     --bg2: #0d1320;
     --card: #111827;
-    --accent: #0094ff;
-    --accent2: #00d4ff;
+    --accent: #F0E4D3;
+    --accent2: #D4C0A8;
     --accent3: #ff6b6b;
     --text: #f0f4ff;
     --muted: #6b7a99;
@@ -86,7 +86,7 @@
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 700px; height: 700px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,148,255,0.08) 0%, rgba(0,148,255,0.05) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(240,228,211,0.08) 0%, rgba(240,228,211,0.05) 40%, transparent 70%);
     pointer-events: none;
     animation: pulse 6s ease-in-out infinite;
   }
@@ -98,7 +98,7 @@
 
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(0,148,255,0.1); border: 1px solid rgba(0,148,255,0.3);
+    background: rgba(240,228,211,0.1); border: 1px solid rgba(240,228,211,0.3);
     color: var(--accent); padding: 6px 16px; border-radius: 100px;
     font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
     text-transform: uppercase; margin-bottom: 32px;
@@ -132,13 +132,13 @@
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #0078d4);
+    background: linear-gradient(135deg, var(--accent), #D4C0A8);
     color: #000; padding: 16px 36px;
     border-radius: 100px; font-weight: 700; font-size: 1rem;
     text-decoration: none; transition: all 0.3s;
-    box-shadow: 0 0 40px rgba(0,148,255,0.3);
+    box-shadow: 0 0 40px rgba(240,228,211,0.3);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,148,255,0.5); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(240,228,211,0.5); }
 
   .btn-secondary {
     background: transparent; color: var(--text);
@@ -254,10 +254,10 @@
   }
   .feature-card::before {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(0,148,255,0.04), transparent);
+    background: linear-gradient(135deg, rgba(240,228,211,0.04), transparent);
     opacity: 0; transition: opacity 0.4s;
   }
-  .feature-card:hover { border-color: rgba(0,148,255,0.3); transform: translateY(-4px); }
+  .feature-card:hover { border-color: rgba(240,228,211,0.3); transform: translateY(-4px); }
   .feature-card:hover::before { opacity: 1; }
 
   .feature-card.wide { grid-column: span 2; }
@@ -267,8 +267,8 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 1.4rem; margin-bottom: 20px;
   }
-  .fi-green { background: rgba(0,148,255,0.15); }
-  .fi-blue { background: rgba(0,148,255,0.15); }
+  .fi-green { background: rgba(240,228,211,0.15); }
+  .fi-blue { background: rgba(240,228,211,0.15); }
   .fi-red { background: rgba(255,107,107,0.15); }
   .fi-purple { background: rgba(160,100,255,0.15); }
   .fi-yellow { background: rgba(255,200,50,0.15); }
@@ -287,7 +287,7 @@
   }
   .bar {
     flex: 1; border-radius: 4px 4px 0 0;
-    background: rgba(0,148,255,0.2);
+    background: rgba(240,228,211,0.2);
     transition: height 0.5s;
   }
   .bar.active { background: var(--accent); }
@@ -303,7 +303,7 @@
     content: '';
     position: absolute; top: -200px; right: -200px;
     width: 600px; height: 600px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,148,255,0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(240,228,211,0.07) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -335,7 +335,7 @@
     padding: 12px 16px; border-radius: 16px;
     font-size: 0.88rem; line-height: 1.6; max-width: 85%;
   }
-  .msg.ai { background: rgba(0,148,255,0.1); border: 1px solid rgba(0,148,255,0.15); align-self: flex-start; }
+  .msg.ai { background: rgba(240,228,211,0.1); border: 1px solid rgba(240,228,211,0.15); align-self: flex-start; }
   .msg.user { background: rgba(255,255,255,0.07); align-self: flex-end; }
 
   .typing { display: flex; gap: 4px; padding: 12px 16px; }
@@ -357,7 +357,7 @@
   }
   .ai-list-icon {
     width: 28px; height: 28px; min-width: 28px; border-radius: 8px;
-    background: rgba(0,148,255,0.15); display: flex; align-items: center;
+    background: rgba(240,228,211,0.15); display: flex; align-items: center;
     justify-content: center; font-size: 0.9rem; margin-top: 1px;
   }
   .ai-list li span { color: var(--muted); }
@@ -380,8 +380,8 @@
     font-size: 0.9rem; font-weight: 600; color: var(--muted);
     transition: all 0.3s;
   }
-  .brand-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,148,255,0.05); }
-  .brand-pill.more { color: var(--accent); border-color: rgba(0,148,255,0.3); }
+  .brand-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(240,228,211,0.05); }
+  .brand-pill.more { color: var(--accent); border-color: rgba(240,228,211,0.3); }
 
   /* ─── HOW IT WORKS ─── */
   .how-section { padding: 120px 60px; }
@@ -393,7 +393,7 @@
     background: var(--card); border: 1px solid var(--border); border-radius: 20px;
     position: relative; transition: all 0.3s;
   }
-  .step:hover { border-color: rgba(0,148,255,0.3); transform: translateY(-4px); }
+  .step:hover { border-color: rgba(240,228,211,0.3); transform: translateY(-4px); }
 
   .step-num {
     font-family: 'Unbounded', sans-serif;
@@ -423,7 +423,7 @@
   }
   .plan.featured {
     border-color: var(--accent); 
-    background: linear-gradient(145deg, rgba(0,148,255,0.07), var(--card));
+    background: linear-gradient(145deg, rgba(240,228,211,0.07), var(--card));
   }
   .plan.featured::before {
     content: 'Популярный';
@@ -462,7 +462,7 @@
   }
   .cta-section::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, rgba(0,148,255,0.07) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(240,228,211,0.07) 0%, transparent 70%);
   }
   .cta-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
   .cta-inner h2 {
@@ -557,7 +557,7 @@
       <div class="watch">
         <div class="watch-band-top"></div>
         <div class="watch-screen">
-          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:#0094ff;stroke-dashoffset:35"/></svg>
+          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:#F0E4D3;stroke-dashoffset:35"/></svg>
           <div class="watch-metric" style="color:#0094ff;font-size:1.3rem">7.4ч</div>
           <div class="watch-label">Сон</div>
         </div>
