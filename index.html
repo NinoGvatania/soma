@@ -539,7 +539,7 @@
       <div class="watch">
         <div class="watch-band-top"></div>
         <div class="watch-screen">
-          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12"/></svg>
+          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:#ff6b6b"/></svg>
           <div class="watch-metric" style="color:#ff6b6b">78</div>
           <div class="watch-label">Стресс</div>
         </div>
@@ -557,8 +557,8 @@
       <div class="watch">
         <div class="watch-band-top"></div>
         <div class="watch-screen">
-          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:#F0E4D3;stroke-dashoffset:35"/></svg>
-          <div class="watch-metric" style="color:#0094ff;font-size:1.3rem">7.4ч</div>
+          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:#4A9EFF;stroke-dashoffset:35"/></svg>
+          <div class="watch-metric" style="color:#4A9EFF;font-size:1.3rem">7.4ч</div>
           <div class="watch-label">Сон</div>
         </div>
         <div class="watch-band-bottom"></div>
@@ -566,12 +566,6 @@
     </div>
   </div>
 </section>
-
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat-item"><span class="stat-num">+43%</span><div class="stat-desc">точность vs стандартные приложения</div></div>
-  <div class="stat-item"><span class="stat-num">50+</span><div class="stat-desc">поддерживаемых устройств</div></div>
-</div>
 
 <!-- FEATURES -->
 <section id="features">
@@ -586,16 +580,16 @@
       <h3>Анализ сна нового уровня</h3>
       <p>Отслеживаем фазы сна, движение, пульс и SpO2 одновременно. Определяем качество каждой фазы, точки пробуждения и идеальное окно для подъёма — не как обычное приложение, а как сомнолог в кармане.</p>
       <div class="mini-chart">
-        <div class="bar" style="height:30%"></div>
-        <div class="bar" style="height:60%"></div>
-        <div class="bar active" style="height:90%"></div>
-        <div class="bar active" style="height:100%"></div>
-        <div class="bar" style="height:80%"></div>
-        <div class="bar" style="height:50%"></div>
-        <div class="bar" style="height:40%"></div>
-        <div class="bar active" style="height:85%"></div>
-        <div class="bar" style="height:60%"></div>
-        <div class="bar" style="height:35%"></div>
+        <div class="bar" style="height:30%;background:rgba(74,158,255,0.2)"></div>
+        <div class="bar" style="height:60%;background:rgba(74,158,255,0.2)"></div>
+        <div class="bar" style="height:90%;background:#4A9EFF"></div>
+        <div class="bar" style="height:100%;background:#4A9EFF"></div>
+        <div class="bar" style="height:80%;background:rgba(74,158,255,0.2)"></div>
+        <div class="bar" style="height:50%;background:rgba(74,158,255,0.2)"></div>
+        <div class="bar" style="height:40%;background:rgba(74,158,255,0.2)"></div>
+        <div class="bar" style="height:85%;background:#4A9EFF"></div>
+        <div class="bar" style="height:60%;background:rgba(74,158,255,0.2)"></div>
+        <div class="bar" style="height:35%;background:rgba(74,158,255,0.2)"></div>
       </div>
     </div>
 
@@ -728,12 +722,12 @@
       <div class="plan-price">0₽</div>
       <div class="plan-period">навсегда бесплатно</div>
       <ul class="plan-features">
-        <li>Основные показатели</li>
-        <li>Анализ сна (базовый)</li>
-        <li>Шагомер и активность</li>
-        <li>Пульс в реальном времени</li>
-        <li>Коэффициент и анализ стресса</li>
-        <li>Индекс восстановления</li>
+        <li>Сон: качество, норма, фазы</li>
+        <li>Восстановление: общий балл 0–100</li>
+        <li>Стресс: уровень за день (0–3)</li>
+        <li>Пульс, SpO2, температура</li>
+        <li>Трекинг активностей и привычек</li>
+        <li class="off">AI-коуч</li>
       </ul>
       <a href="#beta-form" class="plan-btn plan-btn-outline">Подать заявку</a>
     </div>
@@ -743,12 +737,12 @@
       <div class="plan-price">499₽</div>
       <div class="plan-period">в месяц</div>
       <ul class="plan-features">
-        <li>Все функции приложения</li>
-        <li>Продвинутый анализ сна</li>
-        <li>ИИ-помощник</li>
-        <li>Трекер питания с фото</li>
-        <li>Персонализированные рекомендации</li>
-        <li>Неограниченная история</li>
+        <li>Сон: диаграмма фаз, эффективность, недосып, планировщик</li>
+        <li>Восстановление: HRV, ЧСС покоя, дыхание, влияние факторов</li>
+        <li>Стресс: график по времени, дневной/ночной, привязка к событиям</li>
+        <li>HRV, частота дыхания, диапазоны нормы</li>
+        <li>Инсайты привычек, аналитика, недельный обзор</li>
+        <li>AI-коуч: рекомендации, анализ дня, советы по нагрузке</li>
       </ul>
       <a href="#beta-form" class="plan-btn plan-btn-filled">Подать заявку</a>
     </div>
@@ -758,12 +752,13 @@
       <div class="plan-price">4990₽</div>
       <div class="plan-period">в год (экономия 17%)</div>
       <ul class="plan-features">
-        <li>Все функции приложения</li>
+        <li>Сон: диаграмма фаз, эффективность, недосып, планировщик</li>
+        <li>Восстановление: HRV, ЧСС покоя, дыхание, влияние факторов</li>
+        <li>Стресс: график по времени, дневной/ночной, привязка к событиям</li>
+        <li>HRV, частота дыхания, диапазоны нормы</li>
+        <li>Инсайты привычек, аналитика, недельный обзор</li>
+        <li>AI-коуч: рекомендации, анализ дня, советы по нагрузке</li>
         <li>Ранний доступ к новым функциям</li>
-        <li>Продвинутый анализ сна</li>
-        <li>ИИ-помощник</li>
-        <li>Трекер питания с фото</li>
-        <li>Персонализированные рекомендации</li>
       </ul>
       <a href="#beta-form" class="plan-btn plan-btn-outline">Подать заявку</a>
     </div>
