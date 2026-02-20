@@ -10,8 +10,8 @@
     --bg: #070b12;
     --bg2: #0d1320;
     --card: #111827;
-    --accent: #00e5a0;
-    --accent2: #0094ff;
+    --accent: #0094ff;
+    --accent2: #00d4ff;
     --accent3: #ff6b6b;
     --text: #f0f4ff;
     --muted: #6b7a99;
@@ -57,7 +57,7 @@
     letter-spacing: -0.02em;
   }
 
-  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; position: absolute; left: 50%; transform: translateX(-50%); }
   .nav-links a {
     color: var(--muted); text-decoration: none; font-size: 0.9rem;
     font-weight: 500; transition: color 0.3s;
@@ -86,7 +86,7 @@
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 700px; height: 700px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,160,0.08) 0%, rgba(0,148,255,0.05) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,148,255,0.08) 0%, rgba(0,148,255,0.05) 40%, transparent 70%);
     pointer-events: none;
     animation: pulse 6s ease-in-out infinite;
   }
@@ -98,7 +98,7 @@
 
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.3);
+    background: rgba(0,148,255,0.1); border: 1px solid rgba(0,148,255,0.3);
     color: var(--accent); padding: 6px 16px; border-radius: 100px;
     font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
     text-transform: uppercase; margin-bottom: 32px;
@@ -132,13 +132,13 @@
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #00c985);
+    background: linear-gradient(135deg, var(--accent), #0078d4);
     color: #000; padding: 16px 36px;
     border-radius: 100px; font-weight: 700; font-size: 1rem;
     text-decoration: none; transition: all 0.3s;
-    box-shadow: 0 0 40px rgba(0,229,160,0.3);
+    box-shadow: 0 0 40px rgba(0,148,255,0.3);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,229,160,0.5); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,148,255,0.5); }
 
   .btn-secondary {
     background: transparent; color: var(--text);
@@ -254,10 +254,10 @@
   }
   .feature-card::before {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(0,229,160,0.04), transparent);
+    background: linear-gradient(135deg, rgba(0,148,255,0.04), transparent);
     opacity: 0; transition: opacity 0.4s;
   }
-  .feature-card:hover { border-color: rgba(0,229,160,0.3); transform: translateY(-4px); }
+  .feature-card:hover { border-color: rgba(0,148,255,0.3); transform: translateY(-4px); }
   .feature-card:hover::before { opacity: 1; }
 
   .feature-card.wide { grid-column: span 2; }
@@ -267,7 +267,7 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 1.4rem; margin-bottom: 20px;
   }
-  .fi-green { background: rgba(0,229,160,0.15); }
+  .fi-green { background: rgba(0,148,255,0.15); }
   .fi-blue { background: rgba(0,148,255,0.15); }
   .fi-red { background: rgba(255,107,107,0.15); }
   .fi-purple { background: rgba(160,100,255,0.15); }
@@ -287,7 +287,7 @@
   }
   .bar {
     flex: 1; border-radius: 4px 4px 0 0;
-    background: rgba(0,229,160,0.2);
+    background: rgba(0,148,255,0.2);
     transition: height 0.5s;
   }
   .bar.active { background: var(--accent); }
@@ -335,7 +335,7 @@
     padding: 12px 16px; border-radius: 16px;
     font-size: 0.88rem; line-height: 1.6; max-width: 85%;
   }
-  .msg.ai { background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.15); align-self: flex-start; }
+  .msg.ai { background: rgba(0,148,255,0.1); border: 1px solid rgba(0,148,255,0.15); align-self: flex-start; }
   .msg.user { background: rgba(255,255,255,0.07); align-self: flex-end; }
 
   .typing { display: flex; gap: 4px; padding: 12px 16px; }
@@ -357,7 +357,7 @@
   }
   .ai-list-icon {
     width: 28px; height: 28px; min-width: 28px; border-radius: 8px;
-    background: rgba(0,229,160,0.15); display: flex; align-items: center;
+    background: rgba(0,148,255,0.15); display: flex; align-items: center;
     justify-content: center; font-size: 0.9rem; margin-top: 1px;
   }
   .ai-list li span { color: var(--muted); }
@@ -380,8 +380,8 @@
     font-size: 0.9rem; font-weight: 600; color: var(--muted);
     transition: all 0.3s;
   }
-  .brand-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,160,0.05); }
-  .brand-pill.more { color: var(--accent); border-color: rgba(0,229,160,0.3); }
+  .brand-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,148,255,0.05); }
+  .brand-pill.more { color: var(--accent); border-color: rgba(0,148,255,0.3); }
 
   /* ─── HOW IT WORKS ─── */
   .how-section { padding: 120px 60px; }
@@ -419,10 +419,11 @@
     background: var(--card); border: 1px solid var(--border);
     border-radius: 24px; padding: 36px;
     transition: all 0.4s; position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
   }
   .plan.featured {
     border-color: var(--accent); 
-    background: linear-gradient(145deg, rgba(0,229,160,0.07), var(--card));
+    background: linear-gradient(145deg, rgba(0,148,255,0.07), var(--card));
   }
   .plan.featured::before {
     content: 'Популярный';
@@ -439,7 +440,7 @@
   }
   .plan-period { color: var(--muted); font-size: 0.85rem; margin-bottom: 28px; }
 
-  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; flex: 1; }
   .plan-features li { display: flex; gap: 10px; font-size: 0.9rem; }
   .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
   .plan-features li.off::before { content: '×'; color: var(--muted); }
@@ -461,7 +462,7 @@
   }
   .cta-section::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, rgba(0,229,160,0.07) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(0,148,255,0.07) 0%, transparent 70%);
   }
   .cta-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
   .cta-inner h2 {
@@ -476,8 +477,9 @@
   footer {
     border-top: 1px solid var(--border); padding: 48px 60px;
     display: flex; justify-content: space-between; align-items: center;
-    color: var(--muted); font-size: 0.85rem;
+    color: var(--muted); font-size: 0.85rem; position: relative;
   }
+  footer > div:nth-child(2) { position: absolute; left: 50%; transform: translateX(-50%); }
 
   /* ─── ANIMATIONS ─── */
   @keyframes fadeUp {
@@ -546,8 +548,8 @@
       <div class="watch" style="width:150px;height:180px">
         <div class="watch-band-top"></div>
         <div class="watch-screen">
-          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:#00e5a0;stroke-dashoffset:10"/></svg>
-          <div class="watch-metric" style="font-size:1.4rem">94%</div>
+          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:var(--accent);stroke-dashoffset:10"/></svg>
+          <div class="watch-metric" style="font-size:1.4rem;color:var(--accent)">94%</div>
           <div class="watch-label">Восст.</div>
         </div>
         <div class="watch-band-bottom"></div>
@@ -737,7 +739,7 @@
     </div>
 
     <div class="plan featured">
-      <div class="plan-name">Подписка на месяц</div>
+      <div class="plan-name">Месяц</div>
       <div class="plan-price">499₽</div>
       <div class="plan-period">в месяц</div>
       <ul class="plan-features">
@@ -752,7 +754,7 @@
     </div>
 
     <div class="plan">
-      <div class="plan-name">Подписка на год</div>
+      <div class="plan-name">Год</div>
       <div class="plan-price">4990₽</div>
       <div class="plan-period">в год (экономия 17%)</div>
       <ul class="plan-features">
