@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaCore — Твоё здоровье, умнее</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;800&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070b12;
+    --bg2: #0d1320;
+    --card: #111827;
+    --accent: #00e5a0;
+    --accent2: #0094ff;
+    --accent3: #ff6b6b;
+    --text: #f0f4ff;
+    --muted: #6b7a99;
+    --border: rgba(255,255,255,0.06);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    backdrop-filter: blur(20px);
+    background: rgba(7, 11, 18, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.9rem;
+    font-weight: 500; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--accent); color: #000;
+    padding: 10px 24px; border-radius: 100px;
+    font-weight: 700; font-size: 0.85rem;
+    text-decoration: none; transition: all 0.3s;
+    font-family: 'Manrope', sans-serif;
+  }
+  .nav-cta:hover { background: #fff; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 120px 40px 80px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,160,0.08) 0%, rgba(0,148,255,0.05) 40%, transparent 70%);
+    pointer-events: none;
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.7; }
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.3);
+    color: var(--accent); padding: 6px 16px; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.03em; margin-bottom: 28px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--muted); max-width: 600px;
+    margin: 0 auto 48px; font-weight: 400;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-buttons {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    justify-content: center; margin-bottom: 80px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #00c985);
+    color: #000; padding: 16px 36px;
+    border-radius: 100px; font-weight: 700; font-size: 1rem;
+    text-decoration: none; transition: all 0.3s;
+    box-shadow: 0 0 40px rgba(0,229,160,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,229,160,0.5); }
+
+  .btn-secondary {
+    background: transparent; color: var(--text);
+    padding: 16px 36px; border-radius: 100px;
+    font-weight: 600; font-size: 1rem;
+    text-decoration: none; transition: all 0.3s;
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
+
+  /* ─── WATCH MOCKUP ─── */
+  .hero-mockup {
+    position: relative; animation: fadeUp 0.8s 0.4s ease both;
+    margin-top: 20px;
+  }
+
+  .watch-container {
+    display: flex; gap: 30px; align-items: flex-end; justify-content: center; flex-wrap: wrap;
+  }
+
+  .watch {
+    width: 140px; height: 170px;
+    background: linear-gradient(145deg, #1a2235, #0f1829);
+    border-radius: 36px;
+    border: 2px solid rgba(255,255,255,0.12);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .watch:nth-child(2) { width: 120px; height: 150px; animation-delay: -2s; }
+  .watch:nth-child(3) { animation-delay: -4s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .watch-screen {
+    width: 90%; height: 80%; border-radius: 22px;
+    background: var(--bg); overflow: hidden; position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  }
+
+  .watch-metric {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.6rem; font-weight: 800; color: var(--accent);
+  }
+  .watch-label { font-size: 0.55rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+  
+  .watch-ring {
+    position: absolute; top: 8px; right: 8px;
+    width: 32px; height: 32px;
+  }
+  .ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 3; }
+  .ring-fill { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round;
+    stroke-dasharray: 75; stroke-dashoffset: 20;
+    transform: rotate(-90deg); transform-origin: 50% 50%;
+  }
+
+  .watch-band-top, .watch-band-bottom {
+    width: 55%; height: 24px;
+    background: linear-gradient(to bottom, #1e2d45, #162030);
+    border-radius: 4px;
+  }
+  .watch-band-top { margin-bottom: -2px; border-radius: 6px 6px 0 0; }
+  .watch-band-bottom { margin-top: -2px; border-radius: 0 0 6px 6px; }
+
+  /* ─── STATS ROW ─── */
+  .stats-bar {
+    background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 32px 60px; display: flex; gap: 0;
+    justify-content: center; overflow: hidden;
+  }
+
+  .stat-item {
+    flex: 1; max-width: 220px; text-align: center;
+    padding: 0 40px; border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 2rem; font-weight: 800; color: var(--accent); display: block;
+  }
+  .stat-desc { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+
+  /* ─── FEATURES ─── */
+  section { position: relative; z-index: 1; }
+
+  .features { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px;
+  }
+  .section-sub { color: var(--muted); max-width: 520px; margin-bottom: 64px; font-size: 1.05rem; }
+
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+
+  .feature-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 32px;
+    transition: all 0.4s; cursor: default; position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,160,0.04), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .feature-card:hover { border-color: rgba(0,229,160,0.3); transform: translateY(-4px); }
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-card.wide { grid-column: span 2; }
+
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 20px;
+  }
+  .fi-green { background: rgba(0,229,160,0.15); }
+  .fi-blue { background: rgba(0,148,255,0.15); }
+  .fi-red { background: rgba(255,107,107,0.15); }
+  .fi-purple { background: rgba(160,100,255,0.15); }
+  .fi-yellow { background: rgba(255,200,50,0.15); }
+  .fi-teal { background: rgba(0,210,210,0.15); }
+
+  .feature-card h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1rem; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.01em;
+  }
+  .feature-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+
+  /* mini chart inside card */
+  .mini-chart {
+    margin-top: 20px; height: 60px; position: relative;
+    display: flex; align-items: flex-end; gap: 4px;
+  }
+  .bar {
+    flex: 1; border-radius: 4px 4px 0 0;
+    background: rgba(0,229,160,0.2);
+    transition: height 0.5s;
+  }
+  .bar.active { background: var(--accent); }
+
+  /* ─── AI SECTION ─── */
+  .ai-section {
+    padding: 120px 60px;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%);
+    position: relative; overflow: hidden;
+  }
+
+  .ai-section::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,148,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ai-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+
+  .ai-chat {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  }
+
+  .chat-header {
+    display: flex; align-items: center; gap: 12px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ai-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .chat-name { font-weight: 700; font-size: 0.9rem; }
+  .chat-status { font-size: 0.75rem; color: var(--accent); }
+
+  .msg {
+    padding: 12px 16px; border-radius: 16px;
+    font-size: 0.88rem; line-height: 1.6; max-width: 85%;
+  }
+  .msg.ai { background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.15); align-self: flex-start; }
+  .msg.user { background: rgba(255,255,255,0.07); align-self: flex-end; }
+
+  .typing { display: flex; gap: 4px; padding: 12px 16px; }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); opacity: 0.5;
+    animation: blink 1.2s ease-in-out infinite;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,80%,100% { opacity: 0.3; } 40% { opacity: 1; } }
+
+  .ai-content .section-sub { margin-bottom: 32px; }
+
+  .ai-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .ai-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 0.95rem;
+  }
+  .ai-list-icon {
+    width: 28px; height: 28px; min-width: 28px; border-radius: 8px;
+    background: rgba(0,229,160,0.15); display: flex; align-items: center;
+    justify-content: center; font-size: 0.9rem; margin-top: 1px;
+  }
+  .ai-list li span { color: var(--muted); }
+
+  /* ─── COMPATIBILITY ─── */
+  .compat-section { padding: 100px 60px; max-width: 1200px; margin: 0 auto; text-align: center; }
+  .compat-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .compat-sub { color: var(--muted); max-width: 480px; margin: 0 auto 60px; }
+
+  .brands {
+    display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+  }
+  .brand-pill {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 12px 24px; border-radius: 100px;
+    font-size: 0.9rem; font-weight: 600; color: var(--muted);
+    transition: all 0.3s;
+  }
+  .brand-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,160,0.05); }
+  .brand-pill.more { color: var(--accent); border-color: rgba(0,229,160,0.3); }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-section { padding: 120px 60px; }
+  .how-inner { max-width: 1100px; margin: 0 auto; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 60px; }
+
+  .step {
+    text-align: center; padding: 32px 20px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+    position: relative; transition: all 0.3s;
+  }
+  .step:hover { border-color: rgba(0,148,255,0.3); transform: translateY(-4px); }
+
+  .step-num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 2.5rem; font-weight: 800;
+    color: rgba(255,255,255,0.06); margin-bottom: 16px;
+  }
+  .step-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+  .step h4 { font-family: 'Unbounded', sans-serif; font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; }
+  .step p { color: var(--muted); font-size: 0.85rem; }
+
+  /* connector line */
+  .steps::after {
+    content: '';
+    position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+    background: var(--border); z-index: -1;
+  }
+
+  /* ─── PRICING ─── */
+  .pricing-section { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+
+  .plan {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 24px; padding: 36px;
+    transition: all 0.4s; position: relative; overflow: hidden;
+  }
+  .plan.featured {
+    border-color: var(--accent); 
+    background: linear-gradient(145deg, rgba(0,229,160,0.07), var(--card));
+  }
+  .plan.featured::before {
+    content: 'Популярный';
+    position: absolute; top: 20px; right: 20px;
+    background: var(--accent); color: #000;
+    font-size: 0.7rem; font-weight: 800; padding: 4px 12px;
+    border-radius: 100px; letter-spacing: 0.05em;
+  }
+
+  .plan-name { font-family: 'Unbounded', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--muted); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .plan-price {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 2.8rem; font-weight: 800; margin-bottom: 4px;
+  }
+  .plan-period { color: var(--muted); font-size: 0.85rem; margin-bottom: 28px; }
+
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .plan-features li { display: flex; gap: 10px; font-size: 0.9rem; }
+  .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+  .plan-features li.off::before { content: '×'; color: var(--muted); }
+  .plan-features li.off { color: var(--muted); }
+
+  .plan-btn {
+    display: block; text-align: center; text-decoration: none;
+    padding: 14px; border-radius: 100px;
+    font-weight: 700; font-size: 0.95rem; transition: all 0.3s;
+  }
+  .plan-btn-outline { border: 1px solid var(--border); color: var(--text); }
+  .plan-btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .plan-btn-filled { background: var(--accent); color: #000; }
+  .plan-btn-filled:hover { background: #fff; }
+
+  /* ─── CTA BANNER ─── */
+  .cta-section {
+    padding: 100px 60px; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(0,229,160,0.07) 0%, transparent 70%);
+  }
+  .cta-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+  .cta-inner h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem); font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 24px;
+  }
+  .cta-inner p { color: var(--muted); font-size: 1.1rem; margin-bottom: 40px; }
+  .cta-stores { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .store-btn {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+    padding: 14px 28px; border-radius: 16px;
+    text-decoration: none; color: var(--text); transition: all 0.3s;
+  }
+  .store-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+  .store-icon { font-size: 1.6rem; }
+  .store-text .sub { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .store-text .name { font-weight: 700; font-size: 1rem; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border); padding: 48px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--muted); font-size: 0.85rem;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .features { padding: 80px 24px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-card.wide { grid-column: span 1; }
+    .ai-inner { grid-template-columns: 1fr; gap: 40px; }
+    .stats-bar { padding: 24px; flex-wrap: wrap; gap: 24px; }
+    .stat-item { border-right: none; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .ai-section, .how-section, .compat-section, .pricing-section, .cta-section { padding: 80px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+    .watch-container .watch:nth-child(1),
+    .watch-container .watch:nth-child(3) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">VitaCore</div>
+  <ul class="nav-links">
+    <li><a href="#features">Функции</a></li>
+    <li><a href="#ai">ИИ помощник</a></li>
+    <li><a href="#compat">Совместимость</a></li>
+    <li><a href="#pricing">Тарифы</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Скачать бесплатно</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">🔬 Точнее. Умнее. Персональнее</div>
+  <h1>Твоё здоровье<br>под <span>полным контролем</span></h1>
+  <p>Подключи любой фитнес-браслет и получай медицинского уровня аналитику сна, стресса и восстановления — с персональным ИИ, который учится именно под тебя.</p>
+  <div class="hero-buttons">
+    <a href="#cta" class="btn-primary">Начать бесплатно</a>
+    <a href="#features" class="btn-secondary">Узнать больше</a>
+  </div>
+
+  <div class="hero-mockup">
+    <div class="watch-container">
+      <div class="watch">
+        <div class="watch-band-top"></div>
+        <div class="watch-screen">
+          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12"/></svg>
+          <div class="watch-metric" style="color:#ff6b6b">78</div>
+          <div class="watch-label">Стресс</div>
+        </div>
+        <div class="watch-band-bottom"></div>
+      </div>
+      <div class="watch" style="width:150px;height:180px">
+        <div class="watch-band-top"></div>
+        <div class="watch-screen">
+          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:#00e5a0;stroke-dashoffset:10"/></svg>
+          <div class="watch-metric" style="font-size:1.4rem">94%</div>
+          <div class="watch-label">Восст.</div>
+        </div>
+        <div class="watch-band-bottom"></div>
+      </div>
+      <div class="watch">
+        <div class="watch-band-top"></div>
+        <div class="watch-screen">
+          <svg class="watch-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="12"/><circle class="ring-fill" cx="18" cy="18" r="12" style="stroke:#0094ff;stroke-dashoffset:35"/></svg>
+          <div class="watch-metric" style="color:#0094ff;font-size:1.3rem">7.4ч</div>
+          <div class="watch-label">Сон</div>
+        </div>
+        <div class="watch-band-bottom"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num">+43%</span><div class="stat-desc">точность vs стандартные приложения</div></div>
+  <div class="stat-item"><span class="stat-num">50+</span><div class="stat-desc">поддерживаемых устройств</div></div>
+  <div class="stat-item"><span class="stat-num">1M+</span><div class="stat-desc">пользователей по всему миру</div></div>
+  <div class="stat-item"><span class="stat-num">4.9★</span><div class="stat-desc">рейтинг в App Store</div></div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+<div class="features">
+  <div class="section-label">Функциональность</div>
+  <h2 class="section-title">Всё, что нужно знать<br>о своём теле</h2>
+  <p class="section-sub">Используем датчики твоего браслета на 100% — наши алгоритмы выжимают из них максимум.</p>
+
+  <div class="features-grid fade-in">
+    <div class="feature-card wide">
+      <div class="feature-icon fi-green">🌙</div>
+      <h3>Анализ сна нового уровня</h3>
+      <p>Отслеживаем фазы сна, движение, пульс и SpO2 одновременно. Определяем качество каждой фазы, точки пробуждения и идеальное окно для подъёма — не как обычное приложение, а как сомнолог в кармане.</p>
+      <div class="mini-chart">
+        <div class="bar" style="height:30%"></div>
+        <div class="bar" style="height:60%"></div>
+        <div class="bar active" style="height:90%"></div>
+        <div class="bar active" style="height:100%"></div>
+        <div class="bar" style="height:80%"></div>
+        <div class="bar" style="height:50%"></div>
+        <div class="bar" style="height:40%"></div>
+        <div class="bar active" style="height:85%"></div>
+        <div class="bar" style="height:60%"></div>
+        <div class="bar" style="height:35%"></div>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon fi-red">⚡</div>
+      <h3>Мониторинг стресса</h3>
+      <p>Анализируем вариабельность сердечного ритма (HRV) в реальном времени. Видим пики стресса в течение дня и предупреждаем до того, как станет плохо.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon fi-blue">🔋</div>
+      <h3>Индекс восстановления</h3>
+      <p>Единый показатель от 0 до 100 — насколько ты готов к нагрузкам сегодня. Основан на сне, стрессе, пульсе и активности за 7 дней.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon fi-yellow">🍽️</div>
+      <h3>Умный трекер питания</h3>
+      <p>Сфотографируй еду — ИИ распознаёт блюдо и автоматически считает КБЖУ. Или введи вручную. Всё учитывается и связывается с твоим самочувствием.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon fi-purple">💡</div>
+      <h3>Простой интерфейс</h3>
+      <p>Никакой перегрузки данными. Только то, что важно — крупно, понятно, с объяснением. Разработан с нуля для нетехнических пользователей.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon fi-teal">📊</div>
+      <h3>Персональные тренды</h3>
+      <p>Смотри как твои показатели меняются неделями и месяцами. Выявляем паттерны, которые ты сам не замечаешь — между питанием, сном и продуктивностью.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- AI SECTION -->
+<section id="ai" class="ai-section">
+  <div class="ai-inner">
+    <div class="ai-chat fade-in">
+      <div class="chat-header">
+        <div class="ai-avatar">🤖</div>
+        <div>
+          <div class="chat-name">VitaCore AI</div>
+          <div class="chat-status">● онлайн</div>
+        </div>
+      </div>
+      <div class="msg ai">Привет, Михаил! Заметил, что сегодня ночью у тебя было больше поверхностного сна — вероятно, из-за позднего ужина вчера. Вот мои рекомендации…</div>
+      <div class="msg user">Почему я устаю к 15:00 каждый день?</div>
+      <div class="msg ai">Анализирую твои данные за последние 30 дней… Твой провал энергии связан с циркадным циклом + низким HRV по утрам. Попробуй сдвинуть сон на 23:00 — это уже помогло 78% пользователей с похожим профилем.</div>
+      <div class="msg user">Сколько калорий мне нужно сегодня?</div>
+      <div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+
+    <div class="ai-content fade-in">
+      <div class="section-label">ИИ-помощник</div>
+      <h2 class="section-title">Личный тренер,<br>диетолог и врач<br>в одном чате</h2>
+      <p class="section-sub">Наш ИИ не даёт шаблонные советы — он учится на твоих данных и становится умнее с каждым днём.</p>
+      <ul class="ai-list">
+        <li><div class="ai-list-icon">😴</div><span><strong style="color:var(--text)">Советы по сну</strong> — оптимальное время отхода и пробуждения персонально для тебя</span></li>
+        <li><div class="ai-list-icon">🧘</div><span><strong style="color:var(--text)">Борьба со стрессом</strong> — упражнения, дыхательные практики и микро-паузы в нужный момент</span></li>
+        <li><div class="ai-list-icon">🍎</div><span><strong style="color:var(--text)">Питание</strong> — норма КБЖУ с учётом активности, сна и целей</span></li>
+        <li><div class="ai-list-icon">💪</div><span><strong style="color:var(--text)">Восстановление</strong> — когда тренироваться, а когда лучше отдохнуть</span></li>
+        <li><div class="ai-list-icon">📈</div><span><strong style="color:var(--text)">Обучение на тебе</strong> — чем дольше используешь, тем точнее рекомендации</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COMPATIBILITY -->
+<section id="compat">
+<div class="compat-section fade-in">
+  <div class="section-label">Совместимость</div>
+  <h2 class="compat-title">Работает с любым<br>твоим браслетом</h2>
+  <p class="compat-sub">Подключи за 30 секунд — поддерживаем все популярные платформы и бренды.</p>
+  <div class="brands">
+    <div class="brand-pill">⌚ Apple Watch</div>
+    <div class="brand-pill">📱 Mi Band / Xiaomi Smart Band</div>
+    <div class="brand-pill">💚 Garmin</div>
+    <div class="brand-pill">🔵 Fitbit</div>
+    <div class="brand-pill">🟡 Samsung Galaxy Watch</div>
+    <div class="brand-pill">⚫ Huawei Watch</div>
+    <div class="brand-pill">🟢 Polar</div>
+    <div class="brand-pill">🔴 Withings</div>
+    <div class="brand-pill more">+ 40 других устройств</div>
+  </div>
+</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-section">
+<div class="how-inner">
+  <div style="text-align:center">
+    <div class="section-label">Как это работает</div>
+    <h2 class="section-title">Старт за 3 минуты</h2>
+  </div>
+  <div class="steps fade-in">
+    <div class="step">
+      <div class="step-num">01</div>
+      <span class="step-icon">📲</span>
+      <h4>Скачай приложение</h4>
+      <p>Доступно для iOS и Android, бесплатно</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <span class="step-icon">🔗</span>
+      <h4>Подключи браслет</h4>
+      <p>Через Bluetooth или синхронизацию с Health / Google Fit</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <span class="step-icon">📊</span>
+      <h4>Получай данные</h4>
+      <p>Первый анализ уже после первой ночи</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <span class="step-icon">🚀</span>
+      <h4>Улучшай здоровье</h4>
+      <p>Следуй советам ИИ и наблюдай за прогрессом</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+<div class="pricing-section">
+  <div class="section-label">Тарифы</div>
+  <h2 class="section-title">Начни бесплатно</h2>
+  <p class="section-sub">Никаких скрытых платежей. Апгрейд только если захочешь больше.</p>
+
+  <div class="pricing-grid fade-in">
+    <div class="plan">
+      <div class="plan-name">Базовый</div>
+      <div class="plan-price">0₽</div>
+      <div class="plan-period">навсегда бесплатно</div>
+      <ul class="plan-features">
+        <li>Анализ сна (базовый)</li>
+        <li>Шагомер и активность</li>
+        <li>Пульс в реальном времени</li>
+        <li class="off">ИИ-помощник</li>
+        <li class="off">HRV и стресс</li>
+        <li class="off">Трекер питания с фото</li>
+      </ul>
+      <a href="#" class="plan-btn plan-btn-outline">Скачать</a>
+    </div>
+
+    <div class="plan featured">
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">299₽</div>
+      <div class="plan-period">в месяц</div>
+      <ul class="plan-features">
+        <li>Продвинутый анализ сна</li>
+        <li>HRV и мониторинг стресса</li>
+        <li>Индекс восстановления</li>
+        <li>ИИ-помощник (базовый)</li>
+        <li>Трекер питания с фото</li>
+        <li class="off">Персонализация ИИ</li>
+      </ul>
+      <a href="#" class="plan-btn plan-btn-filled">Начать 7 дней бесплатно</a>
+    </div>
+
+    <div class="plan">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">599₽</div>
+      <div class="plan-period">в месяц</div>
+      <ul class="plan-features">
+        <li>Всё из Pro</li>
+        <li>Персонализированный ИИ</li>
+        <li>Неограниченная история</li>
+        <li>Экспорт данных (PDF, CSV)</li>
+        <li>Приоритетная поддержка</li>
+        <li>Ранний доступ к функциям</li>
+      </ul>
+      <a href="#" class="plan-btn plan-btn-outline">Выбрать Premium</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <div class="cta-inner fade-in">
+    <h2>Начни понимать<br>своё тело <span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">сегодня</span></h2>
+    <p>Бесплатно. Без регистрации кредитной карты. Подключается за 3 минуты.</p>
+    <div class="cta-stores">
+      <a href="#" class="store-btn">
+        <span class="store-icon"></span>
+        <div class="store-text">
+          <div class="sub">Скачать в</div>
+          <div class="name">App Store</div>
+        </div>
+      </a>
+      <a href="#" class="store-btn">
+        <span class="store-icon">▶</span>
+        <div class="store-text">
+          <div class="sub">Доступно в</div>
+          <div class="name">Google Play</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">VitaCore</div>
+  <div>© 2025 VitaCore. Все права защищены.</div>
+  <div style="display:flex;gap:24px">
+    <a href="#" style="color:var(--muted);text-decoration:none">Конфиденциальность</a>
+    <a href="#" style="color:var(--muted);text-decoration:none">Условия</a>
+    <a href="#" style="color:var(--muted);text-decoration:none">Поддержка</a>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Animated counter
+  const counters = document.querySelectorAll('.stat-num');
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const text = el.textContent;
+        const num = parseFloat(text);
+        if (!isNaN(num)) {
+          let start = 0;
+          const step = num / 40;
+          const timer = setInterval(() => {
+            start += step;
+            if (start >= num) { el.textContent = text; clearInterval(timer); return; }
+            el.textContent = text.replace(num.toString(), Math.floor(start).toString());
+          }, 30);
+        }
+        countObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => countObserver.observe(c));
+</script>
+</body>
+</html>
