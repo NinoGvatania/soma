@@ -504,8 +504,14 @@
     .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
     .ai-section, .how-section, .compat-section, .pricing-section, .cta-section { padding: 80px 24px; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
-    .watch-container .watch:nth-child(1),
-    .watch-container .watch:nth-child(3) { display: none; }
+    footer > div:nth-child(2) { position: static; transform: none; }
+    .watch-container { gap: 12px; }
+    .watch-container .watch { width: 100px !important; height: 130px !important; border-radius: 28px; }
+    .watch-container .watch .watch-screen { border-radius: 16px; }
+    .watch-container .watch .watch-metric { font-size: 1.1rem !important; }
+    .watch-container .watch .watch-label { font-size: 0.45rem; }
+    .watch-container .watch .watch-ring { width: 24px; height: 24px; top: 5px; right: 5px; }
+    .watch-band-top, .watch-band-bottom { height: 16px; }
   }
 </style>
 </head>
